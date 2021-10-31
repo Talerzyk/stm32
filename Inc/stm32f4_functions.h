@@ -14,6 +14,10 @@ void TIM1Enable(int prescaler, int cout, int interrupt);
 
 void PWMTim1(int comp);
 
+void PWMTim1Update(int duty);
+
+void GenerateSignal(float* signal, int f, int f_s, int n_s, int sig);
+
 void LEDSEnable();
 
 void ADCEnable();
@@ -37,3 +41,7 @@ int ButtonPushed();
 void CountEnable(int time);
 
 int CountCheck();
+
+void PWM__Start();
+
+void PWM__Init();
