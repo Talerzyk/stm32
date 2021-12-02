@@ -1,6 +1,6 @@
 #include "stm32f4_functions.h"
-#include "math.h"
-#include "stdio.h"
+#include <math.h>
+#include <stdio.h>
 
 //KeiluV5
 
@@ -345,11 +345,14 @@ void PWMTim1(int duty)
 
 void PWMTim1Update(int duty)
 {
-	//wait for counter overflow
+	//wait for counter overflow (for UIF to be 0)
 	while (TIM1->SR &= TIM_SR_UIF_Msk);
 
 	//write duty cycle
 	TIM1->CCR4 = duty - 1;
+
+	//set interrupt flag to 0
+	TIM1->SR &= ~TIM_SR_UIF_Msk;
 }
 
 void GenerateSignal(float* signal, int f, int f_s, int n_s, int sig)
